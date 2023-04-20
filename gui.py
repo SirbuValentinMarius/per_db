@@ -1,6 +1,6 @@
 import PySimpleGUI as sg
 import b_and as be
-# test committhhhh
+# test com
 program = False
 menu_def = [["Setari", ["Inscrie_Membru","membru 2",["meniu3"]]]]
 
