@@ -1,6 +1,6 @@
 import PySimpleGUI as sg
 import b_and as be
-#test commit
+# test committhhhh
 program = False
 menu_def = [["Setari", ["Inscrie_Membru","membru 2",["meniu3"]]]]
 
@@ -68,7 +68,7 @@ Inscrie_Membru = sg.Tab("Adeziuni", [
      
     
 layout = [[sg.TabGroup([[autentificare]])]]
-window = sg.Window('Per Membri DB', layout,finalize=True, resizable = True)
+window = sg.Window('Per Membri DB', layout,finalize=True, resizable = True,button_color='#FF0000')
 
 event, values = window.read()
 
