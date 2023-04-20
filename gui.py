@@ -68,7 +68,7 @@ Inscrie_Membru = sg.Tab("Adeziuni", [
      
     
 layout = [[sg.TabGroup([[autentificare]])]]
-window = sg.Window('Per Membri DB', layout,finalize=True, resizable = True,button_color='#FF0000')
+window = sg.Window('Per Membri DB', layout,finalize=True, resizable = True,button_color='#8806ce')
 
 event, values = window.read()
 
