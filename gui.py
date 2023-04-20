@@ -68,7 +68,7 @@ Inscrie_Membru = sg.Tab("Adeziuni", [
      
     
 layout = [[sg.TabGroup([[autentificare]])]]
-window = sg.Window('Per Membri DB', layout,finalize=True, resizable = True,button_color='#0047bb')
+window = sg.Window('Per Membri DB', layout,finalize=True, resizable = True,button_color='#0047bb',background_color='#2e8b57')
 
 event, values = window.read()
 
@@ -141,7 +141,7 @@ elif pozitie== 'Administrator':
 else:
     sg.WIN_CLOSED
 
-my_windows= sg.Window(f'Per DB {be.data}', membru,finalize=True, resizable = True)
+my_windows= sg.Window(f'Per DB {be.data}', membru,finalize=True, resizable = True,background_color='#2e8b57',button_color='#0047bb')
 
 
 while program == True:
