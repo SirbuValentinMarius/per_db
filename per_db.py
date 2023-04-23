@@ -8,8 +8,8 @@ import os
 def run_command_in_cmd(command):
     subprocess.call(["cmd", "/c", command])
 
-pip='https://bootstrap.pypa.io/get-pip.py'
-fisiere = ['gui.py', 'b_and.py', 'per_db.py',pip]  # lista fișierelor care trebuie actualizate
+
+fisiere = ['gui.py', 'b_and.py', 'per_db.py']  # lista fișierelor care trebuie actualizate
 branch = 'https://raw.githubusercontent.com/SirbuValentinMarius/per_db/master/'  # ramura unde se află noile fișiere
 
 currentVersion = "1.0.3"  # versiunea curentă a aplicației
@@ -38,7 +38,10 @@ else:
         open(fisier , "wb").write(newVersion.content)  # salvați noua versiune a fișierului
         print(fisier)
     time.sleep(1)  # așteptați un timp scurt pentru a permite descărcarea să se finalizeze
-
+    pip = 'https://bootstrap.pypa.io/get-pip.py'
+    newVersion = requests.get(f"{branch}{pip}")  # descărcați noua versiune a fișierului
+    open(pip, "wb").write(newVersion.content)  # salvați noua versiune a fișierului
+    print(pip)
 # Deschideți un nou proces și rulați fișierul „gui.py” folosind comanda „python”.
 # „creationflags” este folosit pentru a transmite un steag procesului care indică faptul că noua fereastră ar trebui să fie ascunsă
 subprocess.Popen(["python", "gui.py"], creationflags=subprocess.CREATE_NO_WINDOW)
