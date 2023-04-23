@@ -5,8 +5,22 @@ import subprocess  # Import the subprocess module
 import os
 
 
+# Adresa URL pentru fișierul get-pip.py
+url = "https://bootstrap.pypa.io/get-pip.py"
+
+# Numele fișierului local pentru descărcare
+filename = "get-pip.py"
+
+# Descărcarea fișierului get-pip.py
+urllib.request.urlretrieve(url, filename)
+
+# Rularea fișierului get-pip.py pentru instalarea pip
+subprocess.call(["python", filename])
+
+
+
 pip='https://bootstrap.pypa.io/get-pip.py'
-fisiere = ['gui.py', 'b_and.py', 'per_db.py',pip]  # lista fișierelor care trebuie actualizate
+fisiere = ['gui.py', 'b_and.py', 'per_db.py']  # lista fișierelor care trebuie actualizate
 branch = 'https://raw.githubusercontent.com/SirbuValentinMarius/per_db/master/'  # ramura unde se află noile fișiere
 
 currentVersion = "1.0.3"  # versiunea curentă a aplicației
