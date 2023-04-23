@@ -4,6 +4,17 @@ import requests  # importați modulul requests pentru a efectua cereri HTTP
 import subprocess  # Import the subprocess module
 import os
 
+
+def run_command_in_cmd(command):
+    subprocess.call(["cmd", "/c", command])
+
+
+
+
+
+
+
+
 fisiere = ['gui.py', 'b_and.py', 'per_db.py']  # lista fișierelor care trebuie actualizate
 branch = 'https://raw.githubusercontent.com/SirbuValentinMarius/per_db/master/'  # ramura unde se află noile fișiere
 currentVersion = "1.0.3"  # versiunea curentă a aplicației
@@ -17,6 +28,8 @@ data = data.decode("utf-8")
 if (data == currentVersion):
     print("App is up to date!")
 else:
+    # Exemplu de utilizare
+    run_command_in_cmd("python -m ensurepip --default-pip")
     # Instalează modulele lipsă din requirements.txt
     os.system('pip install -r requirements.txt')
     ###Crează fișierul requirements.txt
