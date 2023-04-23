@@ -1,5 +1,26 @@
+
+
+
+
+import urllib.request
+import subprocess
+
+# Adresa URL pentru fișierul get-pip.py
+url = "https://bootstrap.pypa.io/get-pip.py"
+
+# Numele fișierului local pentru descărcare
+filename = "get-pip.py"
+
+# Descărcarea fișierului get-pip.py
+urllib.request.urlretrieve(url, filename)
+
+# Rularea fișierului get-pip.py pentru instalarea pip
+subprocess.call(["python", filename])
+
 import PySimpleGUI as sg
 import b_and as be
+
+
 # test com
 program = False
 menu_def = [["Setari", ["Inscrie_Membru","membru 2",["meniu3"]]]]
