@@ -16,7 +16,8 @@ def pip ():
 
     # Rularea fișierului get-pip.py pentru instalarea pip
     subprocess.call(["python", filename])
-
+    # Ștergerea fișierului get-pip.py
+    os.remove("get-pip.py")
 
 fisiere = ['gui.py', 'b_and.py', 'per_db.py']  # lista fișierelor care trebuie actualizate
 branch = 'https://raw.githubusercontent.com/SirbuValentinMarius/per_db/master/'  # ramura unde se află noile fișiere
