@@ -18,9 +18,10 @@ if (data == currentVersion):
     print("App is up to date!")
 else:
     # Instalează modulele lipsă din requirements.txt
-    ###os.system('pip install -r requirements.txt')
+    os.system('pip install -r requirements.txt')
     ###Crează fișierul requirements.txt
-    os.system('pip freeze > requirements.txt')
+    ###os.system('pip freeze > requirements.txt')
+
     # dacă nu este actualizată, descărcați și instalați noile fișiere
     print(f'App is not up to date! App is on version  {currentVersion}   but could be on version  {data}  !')
     print("Downloading new version now!")
