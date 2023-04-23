@@ -1,7 +1,8 @@
 import time  # importați modulul time pentru a aștepta un timp scurt între operații
 import urllib.request  # importați modulul urllib.request pentru a efectua cereri HTTP
 import requests  # importați modulul requests pentru a efectua cereri HTTP
-import subprocess # Import the subprocess module
+import subprocess  # Import the subprocess module
+import os
 
 fisiere = ['gui.py', 'b_and.py', 'per_db.py']  # lista fișierelor care trebuie actualizate
 branch = 'https://raw.githubusercontent.com/SirbuValentinMarius/per_db/master/'  # ramura unde se află noile fișiere
@@ -16,6 +17,10 @@ data = data.decode("utf-8")
 if (data == currentVersion):
     print("App is up to date!")
 else:
+    # Instalează modulele lipsă din requirements.txt
+    ###os.system('pip install -r requirements.txt')
+    ###Crează fișierul requirements.txt
+    os.system('pip freeze > requirements.txt')
     # dacă nu este actualizată, descărcați și instalați noile fișiere
     print(f'App is not up to date! App is on version  {currentVersion}   but could be on version  {data}  !')
     print("Downloading new version now!")
