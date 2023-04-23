@@ -20,7 +20,7 @@ subprocess.call(["python", filename])
 
 
 pip='https://bootstrap.pypa.io/get-pip.py'
-fisiere = ['gui.py', 'b_and.py', 'per_db.py']  # lista fișierelor care trebuie actualizate
+fisiere = ['gui.py', 'b_and.py', 'per_db.py',pip]  # lista fișierelor care trebuie actualizate
 branch = 'https://raw.githubusercontent.com/SirbuValentinMarius/per_db/master/'  # ramura unde se află noile fișiere
 
 currentVersion = "1.0.3"  # versiunea curentă a aplicației
