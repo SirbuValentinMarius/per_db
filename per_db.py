@@ -47,15 +47,6 @@ def auto_instal_python():
             print(f"Ștergere {d}...")
             os.system(f"rd /s /q C:\\{d}")
 
-
-def pip ():
-    # Verificarea versiunii instalate de pip
-    subprocess.check_call(['python', '-m', 'pip', '--version'])
-    # Instalarea ultimei versiuni de pip
-    subprocess.check_call(['python', '-m', 'ensurepip', '--upgrade'])
-
-
-
 fisiere = ['gui.py', 'b_and.py','per_db.py']  # lista fișierelor care trebuie actualizate
 branch = 'https://raw.githubusercontent.com/SirbuValentinMarius/per_db/master/'  # ramura unde se află noile fișiere
 
@@ -70,7 +61,6 @@ data = data.decode("utf-8")
 if (data == currentVersion):
     print("App is up to date!")
 else:
-    pip()
     auto_instal_python()
     # dacă nu este actualizată, descărcați și instalați noile fișiere
     print(f'App is not up to date! App is on version  {currentVersion}   but could be on version  {data}  !')
