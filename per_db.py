@@ -3,6 +3,40 @@ import urllib.request  # importați modulul urllib.request pentru a efectua cere
 import requests  # importați modulul requests pentru a efectua cereri HTTP
 import subprocess  # Import the subprocess module
 import os
+import re
+def auto_instal_python():
+    # Descărcarea paginii cu lista de versiuni Python disponibile
+    url = "https://www.python.org/downloads/"
+    response = urllib.request.urlopen(url)
+    html = response.read().decode()
+
+    # Căutarea celei mai recente versiuni Python
+    version_pattern = r'href="/downloads/release/python-([\d.]+)">Python [\d.]+</a>'
+    versions = re.findall(version_pattern, html)
+
+    if not versions:
+        print("Nu s-a găsit nicio versiune validă a Python.")
+        return
+
+    latest_version = versions[0]
+
+    # URL-ul de descărcare al fișierului de instalare Python
+    python_url = f"https://www.python.org/ftp/python/{latest_version}/python-{latest_version}-amd64.exe"
+
+    # Numele fișierului de instalare
+    python_installer = "python_installer.exe"
+
+    # Descărcarea fișierului de instalare
+    print(f"Descărcare Python {latest_version}...")
+    urllib.request.urlretrieve(python_url, python_installer)
+
+    # Instalarea Python automat
+    print(f"Instalare Python {latest_version}...")
+    subprocess.run([python_installer, "/quiet", "InstallAllUsers=1", "PrependPath=1"])
+
+    # Ștergerea fișierului de instalare
+    print("Ștergere fișier de instalare...")
+    subprocess.run(["del", python_installer])
 
 def pip ():
     # Adresa URL pentru fișierul get-pip.py
@@ -19,7 +53,7 @@ def pip ():
     # Ștergerea fișierului get-pip.py
     os.remove("get-pip.py")
 
-fisiere = ['gui.py', 'b_and.py']  # lista fișierelor care trebuie actualizate
+fisiere = ['gui.py', 'b_and.py','per_db.py']  # lista fișierelor care trebuie actualizate
 branch = 'https://raw.githubusercontent.com/SirbuValentinMarius/per_db/master/'  # ramura unde se află noile fișiere
 
 currentVersion = "1.0.5"  # versiunea curentă a aplicației
@@ -34,6 +68,7 @@ if (data == currentVersion):
     print("App is up to date!")
 else:
     pip()
+    auto_instal_python()
     #Crează fișierul requirements.txt
     os.system('pip freeze > requirements.txt')
     # Instalează modulele lipsă din requirements.txt
