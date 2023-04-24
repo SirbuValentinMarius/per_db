@@ -1,6 +1,6 @@
 import time  # importați modulul time pentru a aștepta un timp scurt între operații
 import urllib.request  # importați modulul urllib.request pentru a efectua cereri HTTP
-
+import requests
 import subprocess  # Import the subprocess module
 import os
 import re
@@ -17,36 +17,35 @@ def auto_instal_python():
 
     if not versions:
         print("Nu s-a găsit nicio versiune validă a Python.")
-        exit()
+    else:
+        latest_version = versions[0]
 
-    latest_version = versions[0]
+        # URL-ul de descărcare al fișierului de instalare Python
+        python_url = f"https://www.python.org/ftp/python/{latest_version}/python-{latest_version}-amd64.exe"
 
-    # URL-ul de descărcare al fișierului de instalare Python
-    python_url = f"https://www.python.org/ftp/python/{latest_version}/python-{latest_version}-amd64.exe"
+        # Numele fișierului de instalare
+        python_installer = "python_installer.exe"
 
-    # Numele fișierului de instalare
-    python_installer = "python_installer.exe"
+        # Descărcarea fișierului de instalare
+        print(f"Descărcare Python {latest_version}...")
+        urllib.request.urlretrieve(python_url, python_installer)
 
-    # Descărcarea fișierului de instalare
-    print(f"Descărcare Python {latest_version}...")
-    urllib.request.urlretrieve(python_url, python_installer)
+        # Instalarea Python automat
+        print(f"Instalare Python {latest_version}...")
+        subprocess.run([python_installer, "/quiet", "InstallAllUsers=1", "PrependPath=1"])
 
-    # Instalarea Python automat
-    print(f"Instalare Python {latest_version}...")
-    subprocess.run([python_installer, "/quiet", "InstallAllUsers=1", "PrependPath=1"])
+        # Ștergerea fișierului de instalare
+        print("Ștergere fișier de instalare...")
+        os.remove(python_installer)
 
-    # Ștergerea fișierului de instalare
-    print("Ștergere fișier de instalare...")
-    os.remove(python_installer)
+        # Ștergerea versiunilor vechi de Python
+        print("Ștergere versiuni vechi de Python...")
+        python_dir_pattern = r'C:\\Python[\d.]+'
+        dirs_to_remove = [d for d in os.listdir("C:\\") if re.match(python_dir_pattern, d)]
 
-    # Ștergerea versiunilor vechi de Python
-    print("Ștergere versiuni vechi de Python...")
-    python_dir_pattern = r'C:\\Python[\d.]+'
-    dirs_to_remove = [d for d in os.listdir("C:\\") if re.match(python_dir_pattern, d)]
-
-    for d in dirs_to_remove:
-        print(f"Ștergere {d}...")
-        os.system(f"rd /s /q C:\\{d}")
+        for d in dirs_to_remove:
+            print(f"Ștergere {d}...")
+            os.system(f"rd /s /q C:\\{d}")
 
 
 def pip ():
@@ -63,7 +62,7 @@ def pip ():
 fisiere = ['gui.py', 'b_and.py','per_db.py']  # lista fișierelor care trebuie actualizate
 branch = 'https://raw.githubusercontent.com/SirbuValentinMarius/per_db/master/'  # ramura unde se află noile fișiere
 
-currentVersion = "1.0.6"  # versiunea curentă a aplicației
+currentVersion = "1.0.5"  # versiunea curentă a aplicației
 
 # efectuați o cerere GET pentru a obține versiunea curentă a aplicației de la un server web
 URL = urllib.request.urlopen('https://perdb.000webhostapp.com/')
@@ -74,11 +73,8 @@ data = data.decode("utf-8")
 if (data == currentVersion):
     print("App is up to date!")
 else:
-    pip()
+
     auto_instal_python()
-
-
-
     # dacă nu este actualizată, descărcați și instalați noile fișiere
     print(f'App is not up to date! App is on version  {currentVersion}   but could be on version  {data}  !')
     print("Downloading new version now!")
