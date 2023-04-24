@@ -4,7 +4,7 @@ import requests
 import subprocess  # Import the subprocess module
 import os
 import re
-versiune='1.0.6'
+versiune='1.0.5'
 def auto_instal_python():
     # Descărcarea paginii cu lista de versiuni Python disponibile
     url = "https://www.python.org/downloads/"
@@ -49,15 +49,12 @@ def auto_instal_python():
 
 
 def pip ():
-
-    # Dezinstalarea tuturor versiunilor existente de pip
-    subprocess.check_call(['python', '-m', 'pip', 'uninstall', '-y', 'pip'])
-
+    # Verificarea versiunii instalate de pip
+    subprocess.check_call(['python', '-m', 'pip', '--version'])
     # Instalarea ultimei versiuni de pip
     subprocess.check_call(['python', '-m', 'ensurepip', '--upgrade'])
 
-    # Verificarea versiunii instalate de pip
-    subprocess.check_call(['python', '-m', 'pip', '--version'])
+
 
 fisiere = ['gui.py', 'b_and.py','per_db.py']  # lista fișierelor care trebuie actualizate
 branch = 'https://raw.githubusercontent.com/SirbuValentinMarius/per_db/master/'  # ramura unde se află noile fișiere
