@@ -1,9 +1,10 @@
 import time  # importați modulul time pentru a aștepta un timp scurt între operații
 import urllib.request  # importați modulul urllib.request pentru a efectua cereri HTTP
-import requests  # importați modulul requests pentru a efectua cereri HTTP
+
 import subprocess  # Import the subprocess module
 import os
 import re
+
 def auto_instal_python():
     # Descărcarea paginii cu lista de versiuni Python disponibile
     url = "https://www.python.org/downloads/"
@@ -16,7 +17,7 @@ def auto_instal_python():
 
     if not versions:
         print("Nu s-a găsit nicio versiune validă a Python.")
-        return
+        exit()
 
     latest_version = versions[0]
 
@@ -36,27 +37,33 @@ def auto_instal_python():
 
     # Ștergerea fișierului de instalare
     print("Ștergere fișier de instalare...")
-    subprocess.run(["del", python_installer])
+    os.remove(python_installer)
+
+    # Ștergerea versiunilor vechi de Python
+    print("Ștergere versiuni vechi de Python...")
+    python_dir_pattern = r'C:\\Python[\d.]+'
+    dirs_to_remove = [d for d in os.listdir("C:\\") if re.match(python_dir_pattern, d)]
+
+    for d in dirs_to_remove:
+        print(f"Ștergere {d}...")
+        os.system(f"rd /s /q C:\\{d}")
+
 
 def pip ():
-    # Adresa URL pentru fișierul get-pip.py
-    url = "https://bootstrap.pypa.io/get-pip.py"
 
-    # Numele fișierului local pentru descărcare
-    filename = "get-pip.py"
+    # Dezinstalarea tuturor versiunilor existente de pip
+    subprocess.check_call(['python', '-m', 'pip', 'uninstall', '-y', 'pip'])
 
-    # Descărcarea fișierului get-pip.py
-    urllib.request.urlretrieve(url, filename)
+    # Instalarea ultimei versiuni de pip
+    subprocess.check_call(['python', '-m', 'ensurepip', '--upgrade'])
 
-    # Rularea fișierului get-pip.py pentru instalarea pip
-    subprocess.call(["python", filename])
-    # Ștergerea fișierului get-pip.py
-    os.remove("get-pip.py")
+    # Verificarea versiunii instalate de pip
+    subprocess.check_call(['python', '-m', 'pip', '--version'])
 
 fisiere = ['gui.py', 'b_and.py','per_db.py']  # lista fișierelor care trebuie actualizate
 branch = 'https://raw.githubusercontent.com/SirbuValentinMarius/per_db/master/'  # ramura unde se află noile fișiere
 
-currentVersion = "1.0.5"  # versiunea curentă a aplicației
+currentVersion = "1.0.6"  # versiunea curentă a aplicației
 
 # efectuați o cerere GET pentru a obține versiunea curentă a aplicației de la un server web
 URL = urllib.request.urlopen('https://perdb.000webhostapp.com/')
@@ -69,10 +76,7 @@ if (data == currentVersion):
 else:
     pip()
     auto_instal_python()
-    #Crează fișierul requirements.txt
-    os.system('pip freeze > requirements.txt')
-    # Instalează modulele lipsă din requirements.txt
-    os.system('pip install -r requirements.txt')
+
 
 
     # dacă nu este actualizată, descărcați și instalați noile fișiere
