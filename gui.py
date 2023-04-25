@@ -1,8 +1,12 @@
 import PySimpleGUI as sg
 import b_and as be
+import datetime
 
+def data():
+    data_ora_curenta = datetime.datetime.now()
+    nr_inregistrare = data_ora_curenta.strftime("%Y%m%d%H%M%S")
+    return nr_inregistrare
 
-# test com
 program = False
 menu_def = [["Setari", ["Inscrie_Membru","membru 2",["meniu3"]]]]
 
@@ -18,7 +22,7 @@ Inscrie_Membru = sg.Tab("Adeziuni", [
     [sg.Menu(menu_def)],
     [sg.Text(" ", size=(1, 2))],
     
-    [sg.Text("Numar inregistrare", size=(15, 1), font=16), sg.Input(size=(16, 1), key="IN_numar_inregistrare")],
+    [sg.Text("Numar inregistrare", size=(15, 1), font=16), sg.Text(data(), key="nr_inregistrare")],
     [sg.Text(" ", size=(1, 2))],
     [sg.Text(" ", size=(50, 2)),
      sg.Text("Adeziune", size=(8, 1), font=16)],
@@ -124,7 +128,7 @@ Organizatie = sg.Tab("Organizatie", [
      sg.Input(key = "cauta"),],
     [
         sg.Button('Cauta'),
-        #sg.Button('Sterge'),
+        sg.Button('Sterge'),
     ]])
 if pozitie == "Membru":
     membru=[[sg.TabGroup([[Datele_Tale ]])],
@@ -159,7 +163,7 @@ while program == True:
         utilizator = values["IN_utilizator"]
         parola = values["IN_parola"]
         pozitie = values["membru"]
-        IN_numar_inregistrare = values['IN_numar_inregistrare']
+        IN_numar_inregistrare = data()
         IN_Zi_nastere = values["IN_Zi_nastere"]
         IN_Luna_nastere = values['IN_Luna_nastere']
         IN_An_nastere = values['IN_An_nastere']
