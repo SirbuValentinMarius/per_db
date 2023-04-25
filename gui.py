@@ -102,10 +102,7 @@ while True:
         break  
 
 Datele_Tale = sg.Tab("Datele Tale", [
-    # [sg.Text("Datele mele")],
     [sg.Menu(menu_def)],
-    # [sg.Output(size = (100, 10), key = "output")],
-    # [sg.Text("Datele tale")],
     [sg.Text("Nume : ", size = (9, 1), font = 16), sg.Input(f"{p_nume}",key = "P_Nume")],
     [sg.Text("Prenume : ", size = (9, 1), font = 16), sg.Input(f"{prenume}",key = "prenume")],
     [sg.Text("Organizatie : ", size = (9, 1), font = 16), sg.Input(f"{organizatie}",key = "organizatie")],
@@ -127,7 +124,7 @@ Organizatie = sg.Tab("Organizatie", [
      sg.Input(key = "cauta"),],
     [
         sg.Button('Cauta'),
-        sg.Button('Sterge'),
+        #sg.Button('Sterge'),
     ]])
 if pozitie == "Membru":
     membru=[[sg.TabGroup([[Datele_Tale ]])],

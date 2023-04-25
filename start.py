@@ -1,3 +1,4 @@
-import subprocess  # Import the subprocess module
+import subprocess
 
-subprocess.Popen(["python", "per_db.py"], creationflags=subprocess.CREATE_NO_WINDOW)
+# porniți un alt script Python
+subprocess.run(['python', 'per_db.py'])
