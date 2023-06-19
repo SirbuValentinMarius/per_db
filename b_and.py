@@ -4,7 +4,7 @@ import urllib.request
 URL = urllib.request.urlopen('https://perdb.000webhostapp.com/')
 data = URL.read()
 
-r=open("mongo.txt","r")
+r=open("tm.txt","r")
 client = r.read()
 r.close()
 
@@ -106,16 +106,13 @@ def stergec (categorie:'categorie',colectie:"colectie"):
     
 
 def cauta(keie:"keie",valoare:"valoare"):
-    
-    # creare baza de date care ne eintereseza
+    # creare baza de date care ne interesează
     per_db = client_db["per_db"]
-    # creare colectie care ne intereseza
+    # creare colecție care ne interesează
+    membri = per_db["membri"]
+    y = membri.find({keie: valoare}, {"_id": 0, 'nume': 1, "prenume": 1, 'organizatie': 1, 'nr_telefon': 1, 'e_mail': 1, 'utilizator': 1, 'IN_numar_inregistrare': 1})
 
-    membri = per_db["membri"]       
-    y= membri.find({keie:valoare},{"_id": 0, 'nume': 1, "prenume": 1, 'organizatie':1, 'nr_telefon': 1, 'e_mail':1, 'utilizator': 1 })
-    
-    for x in y :
-        print(x.get("nume"),",",x.get("prenume"),",", x.get('organizatie'),",",x.get('nr_telefon'),',', x.get('e_mail'),',', x.get('utilizator'))
-        
+    for x in y:
+        print(x.get("nume"), ",", x.get("prenume"), ",", x.get('organizatie'), ",", x.get('nr_telefon'), ',', x.get('e_mail'), ',', x.get('utilizator'),',', x.get('IN_numar_inregistrare'))
 
-'''insert(nume= 'testB2', prenume= 'testB2', organizatie= 'organizatie', nr_telefon= 'nr_telefon', e_mail='e_mail', utilizator= 'utilizator',  parola= 'parola',referal= "referal",pozitie="pozitie")'''
+
