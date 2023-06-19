@@ -22,7 +22,7 @@ Inscrie_Membru = sg.Tab("Adeziuni", [
     [sg.Menu(menu_def)],
     [sg.Text(" ", size=(1, 2))],
     
-    [sg.Text("Numar inregistrare", size=(15, 1), font=16), sg.Text(data(), key="nr_inregistrare")],
+    [sg.Text("Numar inregistrare", size=(15, 1), font=16), sg.Input(data(), size=(1, 1),key="nr_inregistrare")],
     [sg.Text(" ", size=(1, 2))],
     [sg.Text(" ", size=(50, 2)),
      sg.Text("Adeziune", size=(8, 1), font=16)],
@@ -124,7 +124,7 @@ Organizatie = sg.Tab("Organizatie", [
     [sg.Menu(menu_def)],
     [sg.Output(size = (80, 10), key = "output")],    
     [sg.Text("Cauta dupa  : ", size = (10, 1), font = 6)],
-    [sg.Combo(['Nume', "Prenume", 'Organizatie', 'Nr_telefon', 'E_mail', 'Utilizator'], size = (8, 1), font = 10,readonly=True,key="alegere", default_value ="Nume"),
+    [sg.Combo(['Nume', "Prenume", 'Organizatie', 'Nr_telefon', 'E_mail', 'Utilizator',"IN_numar_inregistrare"], size = (8, 1), font = 10,readonly=True,key="alegere", default_value ="Nume"),
      sg.Input(key = "cauta"),],
     [
         sg.Button('Cauta'),
@@ -163,7 +163,7 @@ while program == True:
         utilizator = values["IN_utilizator"]
         parola = values["IN_parola"]
         pozitie = values["membru"]
-        IN_numar_inregistrare = data()
+        IN_numar_inregistrare =values["nr_inregistrare"]
         IN_Zi_nastere = values["IN_Zi_nastere"]
         IN_Luna_nastere = values['IN_Luna_nastere']
         IN_An_nastere = values['IN_An_nastere']
@@ -194,10 +194,35 @@ while program == True:
                   IN_ap_domiciliu=IN_ap_domiciliu, IN_serie_id=IN_serie_id, IN_numar_id=IN_numar_id, IN_cnp=IN_cnp,
                   IN_profesie=IN_profesie, IN_ocupatie=IN_ocupatie, IN_strada_domiciliu=IN_strada_domiciliu,
                   IN_localitatea_domiciliului=IN_localitatea_domiciliului)
-
-
+        my_windows["IN_Nume"].update(value='')
+        my_windows["IN_prenume"].update(value='')
+        my_windows["IN_organizatie"].update(value='')
+        my_windows["IN_nr_telefon"].update(value='')
+        my_windows["IN_e_mail"].update(value='')
+        my_windows["IN_utilizator"].update(value='')
+        my_windows["IN_parola"].update(value='')
+        my_windows["membru"].update(value='')
+        my_windows["IN_Zi_nastere"].update(value='')
+        my_windows['IN_Luna_nastere'].update(value='')
+        my_windows['IN_An_nastere'].update(value='')
+        my_windows['IN_localitatea_nasteri'].update(value='')
+        my_windows['IN_judet_nasteri'].update(value='')
+        my_windows['IN_judet_domiciliu'].update(value='')
+        my_windows['IN_nr_domiciliu'].update(value='')
+        my_windows['IN_bl_domiciliu'].update(value='')
+        my_windows['IN_sc_domiciliu'].update(value='')
+        my_windows['IN_et_domiciliu'].update(value='')
+        my_windows['IN_ap_domiciliu'].update(value='')
+        my_windows['IN_serie_id'].update(value='')
+        my_windows['IN_numar_id'].update(value='')
+        my_windows['IN_cnp'].update(value='')
+        my_windows['IN_profesie'].update(value='')
+        my_windows['IN_ocupatie'].update(value='')
+        my_windows['IN_strada_domiciliu'].update(value='')
+        my_windows['IN_localitatea_domiciliului'].update(value='')
+        my_windows["nr_inregistrare"].update(value=data())
+            
     elif event == 'Cauta':
-
         my_windows["output"].update(value='')
         alegere=(values["alegere"].lower())
         cauta =(values["cauta"])
@@ -208,12 +233,12 @@ while program == True:
         alegere1=(values["alegere"].lower())
         cauta1 =(values["cauta"])
          
-        if alegere1 == "nr_telefon" :
+        if alegere1 == "IN_numar_inregistrare" :
             be.stergec(categorie=alegere1,colectie=cauta1)
             my_windows["output"].update(value='')
         else:
             my_windows["output"].update(value='')
-            print ("Doar in optiunea 'NR Telefon'se poate sterge")    
+            print ("Doar in optiunea 'Numar Inregistrare' se poate sterge")    
             
         
     elif event == 'Actualizeaza':
