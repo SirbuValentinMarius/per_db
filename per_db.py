@@ -4,7 +4,7 @@ import requests
 import subprocess  # Import the subprocess module
 import os
 import re
-versiune='1.0.6'
+versiune='1.0.7'
 def auto_instal_python():
     # Descărcarea paginii cu lista de versiuni Python disponibile
     url = "https://www.python.org/downloads/"
